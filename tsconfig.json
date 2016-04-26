@@ -9,6 +9,8 @@
   "files": [
     "main.ts",
     "phaser/phaser.d.ts",
+    "gameState.ts",
+"menu.ts",
     "GamePad.ts"
   ]
 }
