@@ -972,7 +972,7 @@ var Joc;
             this.state.add("game", Joc.gameState);
             this.state.add("load", Joc.load);
             this.state.add("menu", Joc.menu);
-            this.state.start("menu");
+            this.state.start("load");
         }
         return SimpleGame;
     }(Phaser.Game));
