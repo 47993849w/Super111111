@@ -35,7 +35,7 @@ function create() {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.stage.backgroundColor = '#313131';
+    game.stage.backgroundColor = '#313130';
 
     bullets = game.add.group();
     bullets.enableBody = true;
@@ -58,7 +58,7 @@ function create() {
 
     sprite1 = game.add.sprite(32, 200, 'phaser');
 
-    game.physics.arcade.enable(sprite1);
+     game.physics.arcade.enable(sprite1);
 
     group = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
@@ -71,10 +71,17 @@ function create() {
 
         c.body.velocity.x=game.rnd.between(-40,32);
         c.body.velocity.y = game.rnd;
+        c.checkWorldBounds=true;
+        c.body.collideWorldBounds = true;
+        game.physics.enable(c, Phaser.Physics.ARCADE);
+        c.body.bounce.set(1);
+
+
+
 
     }
 
-   // game.time.events.repeat(Phaser.Timer.SECOND * 2, 10, createball, this);
+   game.time.events.duration;
 
 
     cursors = game.input.keyboard.createCursorKeys();
@@ -100,12 +107,16 @@ function update() {
         console.log('boom');
     }
 
+
+    game.physics.arcade.collide(group, group,colision,colision, this);
+
+
     // game.physics.arcade.overlap(sprite, group, collisionHandler, null, this);
 
     sprite1.body.velocity.x = 0;
     sprite1.body.velocity.y = 0;
 
-    if (cursors.left.isDown)
+   if (cursors.left.isDown)
     {
         sprite1.body.velocity.x = -200;
     }
@@ -114,14 +125,14 @@ function update() {
         sprite1.body.velocity.x = 200;
     }
 
-    if (cursors.up.isDown)
+  /*  if (cursors.up.isDown)
     {
         sprite1.body.velocity.y = -200;
     }
     else if (cursors.down.isDown)
     {
         sprite1.body.velocity.y = 200;
-    }
+ }*/
 
 
 
@@ -135,6 +146,10 @@ function update() {
 
 
 
+function colision(group, group1){
+    group.body.bounce.set(0.8);
+}
+
 function processHandler (player, veg) {
 
     return true;
@@ -146,10 +161,21 @@ function collisionHandler (bullet, veg) {
     if (veg.frame == i2)
     {
         veg.kill();
-        group.create(game.rnd.between(100, 770), game.rnd.between(0, 570), 'veggies', i2);
 
-        i2=15;
+        i2=veg.Frame;
+
+
+
     }
+
+    veg.kill();
+    c = group.create(game.rnd.between(100, 770), game.rnd.between(0, 570), 'veggies', veg.frame);
+    c.body.velocity.x=game.rnd.between(-40,32);
+    c.body.velocity.y = game.rnd;
+    c.checkWorldBounds=true;
+    c.body.collideWorldBounds = true;
+    game.physics.enable(c, Phaser.Physics.ARCADE);
+    c.body.bounce.set(1);
 
     game.world.callAll('revive');
 
@@ -174,7 +200,7 @@ function fire() {
 
 function render() {
 
-    game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.total, 32, 32);
-    game.debug.spriteInfo(sprite1, 32, 450);
+ ///   game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.total, 32, 32);
+    //.debug.spriteInfo(sprite1, 32, 450);
 
 }
