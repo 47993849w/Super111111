@@ -328,10 +328,11 @@ module Joc {
                 }
 
                 if (this.guay == 1) {
-                    this.text.text = "VERDE";
+                    this.text.text = "NEGROO";
                     this.text.addColor(this.generateHexColor(), 0)
 
                 }
+                
                 if (this.guay == 2) {
                     this.text.text = "NARANJA";
                     this.text.addColor(this.generateHexColor(), 0)

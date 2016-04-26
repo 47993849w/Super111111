@@ -1177,7 +1177,7 @@ var Joc;
                     this.text.addColor(this.generateHexColor(), 0);
                 }
                 if (this.guay == 1) {
-                    this.text.text = "VERDE";
+                    this.text.text = "NEGROO";
                     this.text.addColor(this.generateHexColor(), 0);
                 }
                 if (this.guay == 2) {
@@ -1277,7 +1277,7 @@ var Joc;
     Joc.menu = menu;
 })(Joc || (Joc = {}));
 /**
- * Created by tomeCabello on 26/04/2016.
+ * Created by tomeCabello on 26/04/2016
  */
 var Joc;
 (function (Joc) {

@@ -1,5 +1,5 @@
 /**
- * Created by tomeCabello on 26/04/2016.
+ * Created by tomeCabello on 26/04/2016
  */
 module Joc {
     export class load extends Phaser.State {
