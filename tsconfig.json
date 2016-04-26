@@ -11,6 +11,7 @@
     "phaser/phaser.d.ts",
     "gameState.ts",
 "menu.ts",
+    "load.ts",
     "GamePad.ts"
   ]
 }

@@ -970,6 +970,7 @@ var Joc;
         function SimpleGame() {
             _super.call(this, 800, 600, Phaser.AUTO, "gameDiv");
             this.state.add("game", Joc.gameState);
+            this.state.add("load", Joc.load);
             this.state.add("menu", Joc.menu);
             this.state.start("menu");
         }
@@ -1245,13 +1246,6 @@ var Joc;
         function menu() {
             _super.apply(this, arguments);
         }
-        menu.prototype.preload = function () {
-            _super.prototype.preload.call(this);
-            this.game.load.image('title1', 'assets/Sintitulo-1.png');
-            this.game.load.image('k', 'assets/jet_219x219_rules02_txt.jpg');
-            this.game.load.image('r', 'assets/jet_219x246_rules03_txt.jpg');
-            this.game.load.image('d', 'assets/glossy-balls-hi.png');
-        };
         menu.prototype.create = function () {
             _super.prototype.create.call(this);
             this.game.stage.setBackgroundColor("#F4E2AB");
@@ -1281,5 +1275,38 @@ var Joc;
         return menu;
     }(Phaser.State));
     Joc.menu = menu;
+})(Joc || (Joc = {}));
+/**
+ * Created by tomeCabello on 26/04/2016.
+ */
+var Joc;
+(function (Joc) {
+    var load = (function (_super) {
+        __extends(load, _super);
+        function load() {
+            _super.apply(this, arguments);
+        }
+        load.prototype.preload = function () {
+            _super.prototype.preload.call(this);
+            this.game.load.image('bullet', 'assets/sprites/purple_ball.png');
+            this.game.load.image('phaser', 'assets/sprites/phaser-dude.png');
+            this.game.load.spritesheet('veggies', 'assets/glossy-balls-hi.png', 78, 84);
+            this.game.load.audio('blaster', 'assets/audio/SoundEffects/blaster.mp3');
+            this.game.load.audio('yes', 'assets/audio/yeah.wav');
+            this.game.load.audio('no', 'assets/audio/nop.wav');
+            this.game.load.image('explode', 'assets/highscore.png');
+            this.game.load.image('title1', 'assets/Sintitulo-1.png');
+            this.game.load.image('k', 'assets/jet_219x219_rules02_txt.jpg');
+            this.game.load.image('r', 'assets/jet_219x246_rules03_txt.jpg');
+            this.game.load.image('d', 'assets/glossy-balls-hi.png');
+            this.game.load.image('pic', 'assets/papel-pintado-liso-con-puntos-gris-y-fondo-blanco.jpg');
+        };
+        load.prototype.create = function () {
+            _super.prototype.create.call(this);
+            this.game.state.start("menu");
+        };
+        return load;
+    }(Phaser.State));
+    Joc.load = load;
 })(Joc || (Joc = {}));
 //# sourceMappingURL=main.js.map

@@ -15,7 +15,7 @@ module Joc {
         constructor() {
             super(800, 600, Phaser.AUTO, "gameDiv");
             this.state.add("game", gameState);
-
+this.state.add("load",load);
             this.state.add("menu", menu)
             this.state.start("menu");
         }
