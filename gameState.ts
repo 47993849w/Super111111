@@ -12,21 +12,7 @@ module Joc {
 
 //var this.game = new Phaser.this.game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
-        preload():void {
-
-            super.preload();
-
-            this.game.load.image('bullet', 'assets/sprites/purple_ball.png');
-            this.game.load.image('phaser', 'assets/sprites/phaser-dude.png');
-            this.game.load.spritesheet('veggies', 'assets/glossy-balls-hi.png', 78, 84);
-            this.game.load.audio('blaster', 'assets/audio/SoundEffects/blaster.mp3');
-            this.game.load.audio('yes', 'assets/audio/yeah.wav')
-            this.game.load.audio('no', 'assets/audio/nop.wav')
-            this.game.load.image('explode', 'assets/highscore.png');
-
-
-            this.game.load.image('pic', 'assets/papel-pintado-liso-con-puntos-gris-y-fondo-blanco.jpg')
-        }
+       
 
         sprite;
 
@@ -100,7 +86,7 @@ module Joc {
             }
 
             if (this.guay == 1) {
-                this.text = this.game.add.text(10, 10, "VERDE", {
+                this.text = this.game.add.text(10, 10, "NEGRO", {
                     font: "65px Arial",
                     fill: this.generateHexColor,
                     align: "center"
@@ -148,9 +134,11 @@ module Joc {
             // Sets background color to white.
 
 
-            this.sprite1 = this.game.add.sprite(400, 200, 'phaser');
+            this.sprite1 = this.game.add.sprite(400, 300, 'phaser');
 
             this.game.physics.arcade.enable(this.sprite1);
+            this.sprite1.checkWorldBounds = true;
+            this.sprite1.body.collideWorldBounds = true;
 
             this.group = this.game.add.physicsGroup(Phaser.Physics.ARCADE);
 
@@ -264,10 +252,10 @@ module Joc {
             this.sprite1.body.velocity.y = 0;
 
             if (this.cursors.left.isDown) {
-                this.sprite1.body.velocity.x = -200;
+                this.sprite1.body.velocity.x = -400;
             }
             else if (this.cursors.right.isDown) {
-                this.sprite1.body.velocity.x = 200;
+                this.sprite1.body.velocity.x = 400;
             }
 
             /*  if (cursors.up.isDown)
@@ -290,7 +278,7 @@ module Joc {
 
 
         gameOver() {
-            this.text2.setText('this.game OVER')
+            this.text2.setText('GAME OVER\nSCORE: '+this.sc)
             //this.game.input.onTap.addOnce(restart,this);
 
 
@@ -335,7 +323,7 @@ module Joc {
                 this.text3.setText('Score: ' + this.sc);
                 if (this.guay == 0) {
                     // text = this.game.add.text(10, 10, "AZUL", {font: "65px Arial", fill: "#ff0044", align: "center"});
-                    this.text.text = 'azul';
+                    this.text.text = 'AZUL';
                     this.text.addColor(this.generateHexColor(), 0)
                 }
 

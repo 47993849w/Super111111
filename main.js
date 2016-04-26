@@ -996,18 +996,6 @@ var Joc;
             this.sc = 0;
             this.hc = 0;
         }
-        //var this.game = new Phaser.this.game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
-        gameState.prototype.preload = function () {
-            _super.prototype.preload.call(this);
-            this.game.load.image('bullet', 'assets/sprites/purple_ball.png');
-            this.game.load.image('phaser', 'assets/sprites/phaser-dude.png');
-            this.game.load.spritesheet('veggies', 'assets/glossy-balls-hi.png', 78, 84);
-            this.game.load.audio('blaster', 'assets/audio/SoundEffects/blaster.mp3');
-            this.game.load.audio('yes', 'assets/audio/yeah.wav');
-            this.game.load.audio('no', 'assets/audio/nop.wav');
-            this.game.load.image('explode', 'assets/highscore.png');
-            this.game.load.image('pic', 'assets/papel-pintado-liso-con-puntos-gris-y-fondo-blanco.jpg');
-        };
         gameState.prototype.create = function () {
             _super.prototype.create.call(this);
             localStorage.setItem("hs", "0");
@@ -1033,7 +1021,7 @@ var Joc;
                 });
             }
             if (this.guay == 1) {
-                this.text = this.game.add.text(10, 10, "VERDE", {
+                this.text = this.game.add.text(10, 10, "NEGRO", {
                     font: "65px Arial",
                     fill: this.generateHexColor,
                     align: "center"
@@ -1070,8 +1058,10 @@ var Joc;
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.text3 = this.game.add.text(600, 10, "Score: " + this.sc, { font: "40px Arial", fill: "#530545", align: "center" });
             // Sets background color to white.
-            this.sprite1 = this.game.add.sprite(400, 200, 'phaser');
+            this.sprite1 = this.game.add.sprite(400, 300, 'phaser');
             this.game.physics.arcade.enable(this.sprite1);
+            this.sprite1.checkWorldBounds = true;
+            this.sprite1.body.collideWorldBounds = true;
             this.group = this.game.add.physicsGroup(Phaser.Physics.ARCADE);
             this.SpaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT, Phaser.Keyboard.SPACEBAR]);
@@ -1137,10 +1127,10 @@ var Joc;
             this.sprite1.body.velocity.x = 0;
             this.sprite1.body.velocity.y = 0;
             if (this.cursors.left.isDown) {
-                this.sprite1.body.velocity.x = -200;
+                this.sprite1.body.velocity.x = -400;
             }
             else if (this.cursors.right.isDown) {
-                this.sprite1.body.velocity.x = 200;
+                this.sprite1.body.velocity.x = 400;
             }
             /*  if (cursors.up.isDown)
              {
@@ -1155,7 +1145,7 @@ var Joc;
             }
         };
         gameState.prototype.gameOver = function () {
-            this.text2.setText('this.game OVER');
+            this.text2.setText('GAME OVER\nSCORE: ' + this.sc);
             //this.game.input.onTap.addOnce(restart,this);
             if (this.sc > parseInt(localStorage.getItem("hs"))) {
                 console.log();
@@ -1182,7 +1172,7 @@ var Joc;
                 this.text3.setText('Score: ' + this.sc);
                 if (this.guay == 0) {
                     // text = this.game.add.text(10, 10, "AZUL", {font: "65px Arial", fill: "#ff0044", align: "center"});
-                    this.text.text = 'azul';
+                    this.text.text = 'AZUL';
                     this.text.addColor(this.generateHexColor(), 0);
                 }
                 if (this.guay == 1) {
@@ -1266,20 +1256,27 @@ var Joc;
             _super.prototype.create.call(this);
             this.game.stage.setBackgroundColor("#F4E2AB");
             //var s = this.game.add.tileSprite(0, 0, 800, 600, 'fondo');
-            this.tec = this.add.sprite(this.world.centerX, this.world.centerY + 100, "k");
+            this.tec = this.add.sprite(this.world.centerX, this.world.centerY + 80, "k");
             this.tec = this.add.sprite(this.world.centerX - 300, this.world.centerY + 100, "r");
             this.tec = this.add.sprite(this.world.centerX - 300, 20, "title1");
             this.tec = this.add.sprite(this.world.centerX - 120, 180, "d");
             var text = this.game.add.text(10, 240, "Presiona Espacio", {
                 font: "35px Arial",
-                fill: "#ffffff",
+                fill: "#000099",
                 align: "center"
             });
             var text2 = this.game.add.text(525, 240, "Presiona Espacio", {
                 font: "35px Arial",
-                fill: "#ffffff",
+                fill: "#000099",
                 align: "center"
             });
+            this.SpaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+            this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT, Phaser.Keyboard.SPACEBAR]);
+        };
+        menu.prototype.update = function () {
+            if (this.SpaceKey.isDown) {
+                this.game.state.start("game");
+            }
         };
         return menu;
     }(Phaser.State));
